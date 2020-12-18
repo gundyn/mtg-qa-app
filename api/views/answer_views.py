@@ -17,7 +17,7 @@ class Answers(generics.ListCreateAPIView):
   def get(self, request):
       """Index Request"""
       answers = Answer.objects.filter(owner=request.user.id)
-      data = AnswerSerializer(answer, many=True).data
+      data = AnswerSerializer(answers, many=True).data
       return Response({ 'answer': data })
 
   def post(self, request):
@@ -33,7 +33,7 @@ class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
   permission_classes=(IsAuthenticated,)
   def get(self, request, pk):
       """Show Request"""
-      answer = get_object_or_404(answer, pk=pk)
+      answer = get_object_or_404(Answer, pk=pk)
       if not request.user.id == answer.owner.id:
           raise PermissionDenied('Unauthorized, you do not own this answer.')
       data = AnswerSerializer(answer).data
