@@ -4,6 +4,7 @@ from rest_framework import serializers
 from .models.mango import Mango
 from .models.user import User
 from .models.question import Question
+from .models.answer import Answer
 
 class MangoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,3 +52,8 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ('id', 'topic', 'content', 'owner')
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ('id', 'answer_title', 'answer', 'owner')
