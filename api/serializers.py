@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from .models.mango import Mango
 from .models.user import User
+from .models.question import Question
 
 class MangoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,3 +46,8 @@ class ChangePasswordSerializer(serializers.Serializer):
     model = get_user_model()
     old = serializers.CharField(required=True)
     new = serializers.CharField(required=True)
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('id', 'topic', 'content', 'owner')

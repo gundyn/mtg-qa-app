@@ -33,5 +33,5 @@ class Questions(generics.ListCreateAPIView):
           # Save the created question & send a response
           question.save()
           return Response({ 'question': question.data }, status=status.HYYP_201_CREATED)
-        # If the data is not valid, return a response with the errors
-        return Response(question.errors, status=status.HTTP_400_BAD_REQUEST)
+      # If the data is not valid, return a response with the errors
+      return Response(question.errors, status=status.HTTP_400_BAD_REQUEST)

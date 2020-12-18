@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 # Create model here
 class Question(models.Model):
   topic = models.CharField(max_length=100)
-  content = models.ChatField(max_length=500)
+  content = models.CharField(max_length=500)
   owner = models.ForeignKey(
       get_user_model(),
       on_delete=models.CASCADE
