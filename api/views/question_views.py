@@ -63,7 +63,7 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def partial_update(self, request, pk):
         """Update Request"""
-        mango = get_object_or_404(Question, pk=pk)
+        question = get_object_or_404(Question, pk=pk)
         if not question.owner.id == request.user.id:
             raise PermissionDenied('Unauthorized, you do not own this question.')
         # Before serializing data and after confirming ownership we attach the currently signed in user as the owner
