@@ -27,7 +27,7 @@ class Questions(generics.ListCreateAPIView):
       # Add user to request data object
       request.data['question']['owner'] = request.user.id
       # Serialize/create question
-      question = QuestionSerializer(data=request.data)
+      question = QuestionSerializer(data=request.data['question'])
       # If the question data is valid according to our serializer...
       if question.is_valid():
           # Save the created question & send a response

@@ -6,7 +6,7 @@ curl "http://localhost:8000/questions" \
   --header "Content-Type: application/json" \
   --header "Authorization: Token ${TOKEN}" \
   --data '{
-    "mango": {
+    "question": {
       "topic": "'"${TOPIC}"'",
       "content": "'"${CONTENT}"'"
     }
