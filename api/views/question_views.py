@@ -14,6 +14,22 @@ from ..serializers import QuestionSerializer, UserSerializer
 class Questions(generics.ListCreateAPIView):
   permission_classes=(IsAuthenticated,)
   serializer_class = QuestionSerializer
+
+  def post(self, request):
+    """Create Request"""
+    # Add user to request data object
+    request.data['question']['owner'] = request.user.id
+    print(request)
+    # Serialize/create question
+    question = QuestionSerializer(data=request.data['question'])
+    # If the question data is valid according to our serializer...
+    if question.is_valid():
+        # Save the created question & send a response
+        question.save()
+        return Response({ 'question': question.data }, status=status.HTTP_201_CREATED)
+    # If the data is not valid, return a response with the errors
+    return Response(question.errors, status=status.HTTP_400_BAD_REQUEST)
+
   def get(self, request):
     """Index Request"""
     # Get all the questions:
@@ -21,20 +37,6 @@ class Questions(generics.ListCreateAPIView):
     # Run the data through the serializer
     data = QuestionSerializer(questions, many=True).data
     return Response({ 'questions': data })
-
-  def post(self, request):
-      """Create Request"""
-      # Add user to request data object
-      request.data['question']['owner'] = request.user.id
-      # Serialize/create question
-      question = QuestionSerializer(data=request.data['question'])
-      # If the question data is valid according to our serializer...
-      if question.is_valid():
-          # Save the created question & send a response
-          question.save()
-          return Response({ 'question': question.data }, status=status.HTTP_201_CREATED)
-      # If the data is not valid, return a response with the errors
-      return Response(question.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=(IsAuthenticated,)

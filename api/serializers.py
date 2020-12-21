@@ -51,7 +51,7 @@ class ChangePasswordSerializer(serializers.Serializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('id', 'topic', 'content', 'owner', 'answers')
+        fields = ('id', 'topic', 'content', 'owner')
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
