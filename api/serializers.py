@@ -49,6 +49,7 @@ class ChangePasswordSerializer(serializers.Serializer):
     new = serializers.CharField(required=True)
 
 class QuestionSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(source='user_id', read_only=True)
     class Meta:
         model = Question
         fields = ('id', 'topic', 'content', 'owner')
