@@ -48,12 +48,16 @@ class ChangePasswordSerializer(serializers.Serializer):
     old = serializers.CharField(required=True)
     new = serializers.CharField(required=True)
 
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Question
-        fields = ('id', 'topic', 'content', 'owner')
-
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ('id', 'answer_title', 'answer', 'owner', 'question')
+        fields = ['id', 'title', 'answer', 'owner', 'question']
+
+class QuestionSerializer(serializers.ModelSerializer):
+    answers = AnswerSerializer(many=True, read_only=True)
+    class Meta:
+        model = Question
+        fields = ['id', 'topic', 'content', 'owner', 'answers']
+
+class AnswerReadSerializer(serializers.ModelSerializer):
+  question = serializers.StringRelatedField()
