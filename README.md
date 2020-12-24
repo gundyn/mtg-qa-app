@@ -43,8 +43,6 @@ Have you ever been playing a game of Magic and been uncertian on the ruling for 
 | PATCH         | /questions/:id | update question       |
 | DELETE        | /questions/:id | delete question      |
 **Answers**
-| HTTP Method   | URL Path     | Result            |
-|:--------------|:-------------|:------------------|
 | GET           | /answers     | list of questions   |
 | GET           | /answers/:id | single question  |
 | POST          | /answers/       | create question       |
